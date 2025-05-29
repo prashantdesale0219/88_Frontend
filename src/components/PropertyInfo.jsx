@@ -4,12 +4,12 @@ import axios from 'axios';
 import { FiMapPin, FiHome, FiCheckSquare, FiStar, FiInfo, FiDollarSign, FiCalendar, FiMaximize, FiLayout, FiImage } from 'react-icons/fi';
 import PropertyGallery from './PropertyGallery';
 
-const API_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:8080/api';
+const API_URL = import.meta.env.VITE_APP_API_URL || 'https://eight8-royal-backend.onrender.com/api';
 
 const Container = styled.div`
   background-color: #1e1e1e;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 0;
   width: 90%;
   max-width: 800px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -19,6 +19,18 @@ const Container = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   position: relative;
   overflow: hidden;
+  
+  @media (max-width: 768px) {
+    width: 95%;
+    margin: 0.75rem auto;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 100%;
+    margin: 0.5rem auto;
+    border-radius: 8px;
+  }
   
   &::before {
     content: '';
@@ -45,6 +57,19 @@ const Title = styled.h2`
   display: inline-block;
   width: 100%;
   
+  @media (max-width: 768px) {
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    font-size: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
+    letter-spacing: -0.3px;
+  }
+  
   &::after {
     content: '';
     position: absolute;
@@ -55,6 +80,11 @@ const Title = styled.h2`
     height: 3px;
     background: linear-gradient(90deg, #4a6fa5, #6a8fc5, #4a6fa5);
     border-radius: 3px;
+    
+    @media (max-width: 480px) {
+      width: 80px;
+      height: 2px;
+    }
   }
 `;
 
@@ -68,10 +98,27 @@ const Section = styled.div`
   position: relative;
   overflow: hidden;
   
+  @media (max-width: 768px) {
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    border-radius: 7px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+  }
+  
   &:hover {
     border-color: #4a6fa5;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
+    
+    @media (max-width: 480px) {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
   }
   
   &::before {
@@ -97,12 +144,29 @@ const SectionTitle = styled.h3`
   padding-bottom: 0.5rem;
   border-bottom: 1px dashed #444;
   
+  @media (max-width: 768px) {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    padding-bottom: 0.4rem;
+  }
+  
   svg {
     margin-right: 10px;
     background-color: #4a6fa5;
     padding: 6px;
     border-radius: 6px;
     color: white;
+    
+    @media (max-width: 480px) {
+      padding: 4px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
   }
 `;
 
@@ -113,6 +177,18 @@ const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 0.75rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.6rem;
+    padding-left: 0.25rem;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+    padding-left: 0;
+  }
 `;
 
 const ListItem = styled.li`
@@ -127,11 +203,28 @@ const ListItem = styled.li`
   transition: all 0.3s ease;
   cursor: default;
   
+  @media (max-width: 768px) {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 0.4rem;
+  }
+  
   &:hover {
     background-color: #333;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-color: #4a6fa5;
+    
+    @media (max-width: 480px) {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
   }
   
   svg {
@@ -141,6 +234,12 @@ const ListItem = styled.li`
     background-color: #4a6fa5;
     padding: 4px;
     border-radius: 4px;
+    
+    @media (max-width: 480px) {
+      margin-right: 0.5rem;
+      padding: 3px;
+      border-radius: 3px;
+    }
   }
 `;
 
@@ -151,11 +250,31 @@ const InfoRow = styled.div`
   padding: 0.5rem 0 0.75rem;
   transition: all 0.3s ease;
   
+  @media (max-width: 768px) {
+    margin-bottom: 0.6rem;
+    padding: 0.4rem 0 0.6rem;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0 0.5rem;
+    flex-direction: column;
+  }
+  
   &:hover {
     background-color: #2a2a2a;
     border-radius: 6px;
     padding: 0.5rem 0.75rem 0.75rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    
+    @media (max-width: 768px) {
+      padding: 0.4rem 0.6rem 0.6rem;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 0.3rem 0.5rem 0.5rem;
+      border-radius: 4px;
+    }
   }
   
   &:last-child {
@@ -171,6 +290,12 @@ const InfoLabel = styled.div`
   display: flex;
   align-items: center;
   
+  @media (max-width: 480px) {
+    width: 100%;
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+  }
+  
   svg {
     margin-right: 0.75rem;
     color: white;
@@ -178,6 +303,12 @@ const InfoLabel = styled.div`
     padding: 4px;
     border-radius: 4px;
     flex-shrink: 0;
+    
+    @media (max-width: 480px) {
+      margin-right: 0.5rem;
+      padding: 3px;
+      border-radius: 3px;
+    }
   }
 `;
 
@@ -187,6 +318,16 @@ const InfoValue = styled.div`
   color: #f5f5f5;
   position: relative;
   padding-left: 0.5rem;
+  
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+  
+  @media (max-width: 480px) {
+    width: 100%;
+    padding-left: 1.5rem;
+    font-size: 0.8rem;
+  }
   
   &::before {
     content: '';
@@ -198,6 +339,12 @@ const InfoValue = styled.div`
     height: 70%;
     background-color: #333;
     border-radius: 1px;
+    
+    @media (max-width: 480px) {
+      left: 0;
+      top: 0.5rem;
+      height: 100%;
+    }
   }
 `;
 
@@ -205,6 +352,14 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
+  
+  @media (max-width: 768px) {
+    margin-top: 1.25rem;
+  }
+  
+  @media (max-width: 480px) {
+    margin-top: 1rem;
+  }
 `;
 
 const Button = styled.button`
@@ -224,10 +379,28 @@ const Button = styled.button`
   position: relative;
   overflow: hidden;
   
+  @media (max-width: 768px) {
+    padding: 0.7rem 1.25rem;
+    font-size: 0.9rem;
+    border-radius: 7px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    width: 100%;
+  }
+  
   &:hover {
     background-color: #3a5a8f;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    
+    @media (max-width: 480px) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
   }
   
   &:active {
@@ -257,6 +430,10 @@ const Button = styled.button`
   
   svg {
     margin-right: 0.75rem;
+    
+    @media (max-width: 480px) {
+      margin-right: 0.5rem;
+    }
   }
 `;
 

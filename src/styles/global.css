@@ -21,6 +21,34 @@ input, select, textarea {
   font-family: 'Poppins', sans-serif;
 }
 
+/* Responsive base font size */
+html {
+  font-size: 16px;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+/* Responsive container */
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -37,4 +65,23 @@ input, select, textarea {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #a5b4cb;
+}
+
+/* Utility classes for responsive design */
+.hidden-mobile {
+  display: block;
+}
+
+.visible-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  }
+  
+  .visible-mobile {
+    display: block;
+  }
 }

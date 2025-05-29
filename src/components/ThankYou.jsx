@@ -23,6 +23,17 @@ const Container = styled.div`
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   text-align: center;
   border: 1px solid #444;
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    width: 95%;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1rem;
+    width: 100%;
+    border-radius: 8px;
+  }
 `;
 
 const Title = styled.h2`
@@ -30,12 +41,26 @@ const Title = styled.h2`
   margin-bottom: 1rem;
   border-bottom: 1px solid #444;
   padding-bottom: 0.5rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const Message = styled.p`
   color: #f5f5f5;
   margin-bottom: 1.5rem;
   line-height: 1.5;
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
 `;
 
 const Button = styled.button`
@@ -48,6 +73,12 @@ const Button = styled.button`
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  
+  @media (max-width: 480px) {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
   
   &:hover {
     background-color: #3a5a8f;

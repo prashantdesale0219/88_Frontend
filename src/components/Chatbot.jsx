@@ -26,6 +26,12 @@ const ChatbotContainer = styled.div`
     height: 3px;
     z-index: 1;
   }
+  
+  @media (max-width: 768px) {
+    height: 100vh;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
 `;
 
 const ChatHeader = styled.div`
@@ -58,6 +64,10 @@ const ChatMessages = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  
+  @media (max-width: 768px) {
+    padding-bottom: 80px; /* Add space for the fixed input bar */
+  }
 `;
 
 const Message = styled.div`
@@ -117,6 +127,16 @@ const ChatInput = styled.form`
   display: flex;
   padding: 1rem;
   border-top: 1px solid #444;
+  
+  @media (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #121212;
+    z-index: 100;
+    padding: 0.75rem;
+  }
 `;
 
 const Input = styled.input`

@@ -8,7 +8,6 @@ const AppContainer = styled.div`
   align-items: center;
   min-height: 100vh;
   background: #121212;
-  padding: 2rem;
 `;
 
 const Header = styled.header`

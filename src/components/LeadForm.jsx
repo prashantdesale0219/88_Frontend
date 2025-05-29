@@ -23,6 +23,17 @@ const FormContainer = styled.div`
   max-width: 800px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid #444;
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    width: 95%;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1rem;
+    width: 100%;
+    border-radius: 8px;
+  }
 `;
 
 const Title = styled.h2`
@@ -31,23 +42,46 @@ const Title = styled.h2`
   text-align: center;
   border-bottom: 1px solid #444;
   padding-bottom: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
 `;
 
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  
+  @media (max-width: 480px) {
+    gap: 0.3rem;
+  }
 `;
 
 const Label = styled.label`
   font-weight: 500;
   color: #f5f5f5;
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Input = styled.input`
@@ -59,6 +93,12 @@ const Input = styled.input`
   transition: border-color 0.2s;
   background-color: #2d2d2d;
   color: #f5f5f5;
+  
+  @media (max-width: 480px) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
   
   &:focus {
     border-color: #4a6fa5;
@@ -79,6 +119,12 @@ const Select = styled.select`
   background-color: #2d2d2d;
   color: #f5f5f5;
   
+  @media (max-width: 480px) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+  
   &:focus {
     border-color: #4a6fa5;
   }
@@ -93,6 +139,11 @@ const ButtonGroup = styled.div`
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 `;
 
 const Button = styled.button`
@@ -105,9 +156,10 @@ const Button = styled.button`
   cursor: pointer;
   transition: background-color 0.2s;
   
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  @media (max-width: 480px) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
   }
 `;
 
@@ -115,25 +167,33 @@ const SubmitButton = styled(Button)`
   background-color: #4a6fa5;
   color: white;
   
-  &:hover:not(:disabled) {
+  &:hover {
     background-color: #3a5a8f;
+  }
+  
+  &:disabled {
+    background-color: #555;
+    cursor: not-allowed;
   }
 `;
 
 const CancelButton = styled(Button)`
-  background-color: #2d2d2d;
+  background-color: #333;
   color: #f5f5f5;
-  border: 1px solid #444;
   
   &:hover {
-    background-color: #3d3d3d;
+    background-color: #444;
   }
 `;
 
-const ErrorMessage = styled.p`
-  color: #e53935;
-  font-size: 0.875rem;
+const ErrorMessage = styled.div`
+  color: #e57373;
+  font-size: 0.9rem;
   margin-top: 0.25rem;
+  
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const LeadForm = ({ onSubmit, onCancel }) => {
