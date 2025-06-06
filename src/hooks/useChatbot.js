@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_APP_API_URL || 'https://eight8-royal-backend.onrender.com/api';
+const API_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:8080/api';
 
 // Language selection removed as AI detects language automatically
 // Default language is still defined for internal use
@@ -64,8 +64,8 @@ export const useChatbot = () => {
     const welcomeMessage = {
       role: 'assistant',
       content: language === 'en' 
-        ? 'Hi there! 👋 I am your property assistant. What should I call you?'
-        : 'नमस्ते! 👋 मैं आपका प्रॉपर्टी सहायक हूं। मैं आपको क्या नाम से पुकारूं?'
+        ? 'Hi there! 👋 I am your property assistant. Please tell me your name so I can assist you better.'
+        : 'नमस्ते! 👋 मैं आपका प्रॉपर्टी सहायक हूं। कृपया मुझे अपना नाम बताएं ताकि मैं आपकी बेहतर सहायता कर सकूं।'
     };
     setMessages([welcomeMessage]);
     setChatHistory([welcomeMessage]);
@@ -82,7 +82,28 @@ export const useChatbot = () => {
     
     // Check if this is the first user message (name)
     if (messages.length === 1) {
-      setUserName(message);
+      // Check if the message is a greeting or casual message rather than a name
+      const commonGreetings = ['hello', 'hi', 'hey', 'namaste', 'नमस्ते', 'हेलो', 'हाय', 'नमस्कार', 'प्रणाम'];
+      const isGreeting = commonGreetings.some(greeting => 
+        message.toLowerCase().includes(greeting.toLowerCase()));
+      
+      // If it's not just a greeting, set it as the username
+      if (!isGreeting) {
+        setUserName(message);
+      } else {
+        // If it's a greeting, we'll wait for the next message for the name
+        // We can add a special flag or just continue the conversation
+        const namePrompt = language === 'en' 
+          ? 'Nice to meet you! What should I call you?'
+          : 'आपसे मिलकर अच्छा लगा! मैं आपको क्या नाम से पुकारूं?';
+        
+        // Add AI response to chat asking for name again
+        const aiMessage = { role: 'assistant', content: namePrompt };
+        setMessages(prev => [...prev, aiMessage]);
+        setChatHistory(prev => [...prev, userMessage, aiMessage]);
+        setIsLoading(false);
+        return;
+      }
     }
     
     // Process lead collection answers if in lead collection mode
